@@ -2,14 +2,10 @@ body {
     background: linear-gradient(to right, rgb(82, 82, 202), rgb(255, 0, 0));
     font-family: "Montserrat", serif;
     letter-spacing: 0.6px;
-    overflow: visible;
+    /* overflow: visible; */
 }
 
-@media screen and (min-width: 768px) {
-    body {
-        overflow: hidden;
-    }
-}
+
 
 h1,
 h2,
