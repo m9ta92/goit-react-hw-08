@@ -14,18 +14,16 @@ import { authReducer } from './auth/slice';
 import { contactsReducer } from './contacts/slice';
 import { filtersReducer } from './filters/slice';
 
-const persistedAuthReducer = persistReducer(
-	{
-		key: 'jwt-token',
-		storage,
-		whitelist: ['token'],
-	},
-	authReducer
-);
+// Persisting token field from auth slice to localstorage
+const authPersistConfig = {
+	key: 'auth',
+	storage,
+	whitelist: ['token'],
+};
 
 export const store = configureStore({
 	reducer: {
-		auth: persistedAuthReducer,
+		auth: persistReducer(authPersistConfig, authReducer),
 		contacts: contactsReducer,
 		filters: filtersReducer,
 	},
@@ -35,6 +33,7 @@ export const store = configureStore({
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
 		}),
+	// devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

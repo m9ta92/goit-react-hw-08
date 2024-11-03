@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { register, logIn, logOut, refreshUser } from './operations';
 
 const initialState = {
-	user: { name: null, email: null },
-	token: null,
-	isLoggedIn: false,
+	user: { name: localStorage.getItem('authUser') || null, email: null },
+	token: localStorage.getItem('authToken') || null,
+	isLoggedIn: !!localStorage.getItem('authToken'),
 	isRefreshing: false,
 };
 
@@ -22,11 +22,15 @@ const authSlice = createSlice({
 				state.user = action.payload.user;
 				state.token = action.payload.token;
 				state.isLoggedIn = true;
+				localStorage.setItem('authUser', action.payload.user.name);
+				localStorage.setItem('authToken', action.payload.token);
 			})
 			.addCase(logOut.fulfilled, state => {
 				state.user = { name: null, email: null };
 				state.token = null;
 				state.isLoggedIn = false;
+				localStorage.removeItem('authToken');
+				localStorage.removeItem('authUser');
 			})
 			.addCase(refreshUser.pending, state => {
 				state.isRefreshing = true;
