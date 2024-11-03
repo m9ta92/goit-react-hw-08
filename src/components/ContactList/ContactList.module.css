@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 25px;
+    justify-content: center;
+    padding: 15px;
+    min-width: 314px;
+    max-width: 314px;
+    max-height: 237px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5)
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
