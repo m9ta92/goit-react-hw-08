@@ -2,32 +2,33 @@ import css from './Contact.module.css';
 
 import { TbUserFilled } from 'react-icons/tb';
 import { TbPhoneFilled } from 'react-icons/tb';
-
-import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/operations';
+import Modal from '../Modal/Modal';
+import { useState } from 'react';
 
 const Contact = ({ id, name, number }) => {
-	const dispatch = useDispatch();
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const openModal = () => setIsModalOpen(true);
+	const closeModal = () => setIsModalOpen(false);
 
 	return (
-		<div className={css.item}>
-			<div>
-				<div className={css.title}>
-					<TbUserFilled />
-					<p>{name}</p>
+		<>
+			<div className={css.item}>
+				<div>
+					<div className={css.title}>
+						<TbUserFilled />
+						<p>{name}</p>
+					</div>
+					<div className={css.title}>
+						<TbPhoneFilled className={css.phone} />
+						<a href="tel:">{number}</a>
+					</div>
 				</div>
-				<div className={css.title}>
-					<TbPhoneFilled className={css.phone} />
-					<a href="tel:">{number}</a>
-				</div>
+				<button className={css.deleteBtn} onClick={openModal}>
+					❌
+				</button>
 			</div>
-			<button
-				className={css.deleteBtn}
-				onClick={() => dispatch(deleteContact(id))}
-			>
-				❌
-			</button>
-		</div>
+			<Modal isOpen={isModalOpen} onClose={closeModal} id={id} name={name} />
+		</>
 	);
 };
 

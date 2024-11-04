@@ -10,3 +10,14 @@
 .link:hover {
     color: red;
 }
+
+.active {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2px;
+    background-color: rgb(195, 228, 195);
+}
+
+.active:hover {
+    transform: scale(1.03);
+}

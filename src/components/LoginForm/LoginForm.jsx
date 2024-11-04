@@ -28,7 +28,15 @@ export const LoginForm = () => {
 				email: form.elements.email.value,
 				password: form.elements.password.value,
 			})
-		);
+		)
+			.unwrap()
+			.then(() => {
+				console.log('login success');
+			})
+			.catch(() => {
+				console.log('login error');
+			});
+
 		form.reset();
 	};
 
@@ -70,7 +78,7 @@ export const LoginForm = () => {
 					helperText={formik.touched.password && formik.errors.password}
 				/>
 				<Button color="primary" variant="contained" fullWidth type="submit">
-					Submit
+					Log In
 				</Button>
 			</form>
 		</div>

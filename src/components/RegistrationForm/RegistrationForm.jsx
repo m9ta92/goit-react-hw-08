@@ -27,6 +27,7 @@ export const RegistrationForm = () => {
 	const handleSubmit = e => {
 		e.preventDefault();
 		const form = e.target;
+
 		dispatch(
 			register({
 				name: form.elements.name.value,
@@ -34,6 +35,7 @@ export const RegistrationForm = () => {
 				password: form.elements.password.value,
 			})
 		);
+
 		form.reset();
 	};
 
@@ -88,7 +90,7 @@ export const RegistrationForm = () => {
 					helperText={formik.touched.password && formik.errors.password}
 				/>
 				<Button color="primary" variant="contained" fullWidth type="submit">
-					Submit
+					Register
 				</Button>
 			</form>
 		</div>

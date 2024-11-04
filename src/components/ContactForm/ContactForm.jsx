@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ContactForm = () => {
 	const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const ContactForm = () => {
 	const handleSubmit = (values, actions) => {
 		onAddContact(values);
 		actions.resetForm();
+		toast.success('Added a new contact');
 	};
 
 	const onAddContact = formData => {
@@ -34,35 +36,38 @@ const ContactForm = () => {
 	});
 
 	return (
-		<Formik
-			initialValues={{ name: '', number: '' }}
-			validationSchema={AddContactSchema}
-			onSubmit={handleSubmit}
-		>
-			<Form className={css.form}>
-				<label>
-					<Field
-						className={css.input}
-						type="text"
-						name="name"
-						placeholder="Enter your name..."
-					/>
-				</label>
-				<ErrorMessage className={css.error} name="name" component="span" />
-				<label>
-					<Field
-						className={css.input}
-						type="text"
-						name="number"
-						placeholder="Enter your number..."
-					/>
-				</label>
-				<ErrorMessage className={css.error} name="number" component="span" />
-				<button className={css.btn} type="submit">
-					<IoPersonAddSharp />
-				</button>
-			</Form>
-		</Formik>
+		<>
+			<Formik
+				initialValues={{ name: '', number: '' }}
+				validationSchema={AddContactSchema}
+				onSubmit={handleSubmit}
+			>
+				<Form className={css.form}>
+					<label>
+						<Field
+							className={css.input}
+							type="text"
+							name="name"
+							placeholder="Enter your name..."
+						/>
+					</label>
+					<ErrorMessage className={css.error} name="name" component="span" />
+					<label>
+						<Field
+							className={css.input}
+							type="text"
+							name="number"
+							placeholder="Enter your number..."
+						/>
+					</label>
+					<ErrorMessage className={css.error} name="number" component="span" />
+					<button className={css.btn} type="submit">
+						<IoPersonAddSharp />
+					</button>
+				</Form>
+			</Formik>
+			<Toaster position="top-center" reverseOrder={false} />
+		</>
 	);
 };
 export default ContactForm;

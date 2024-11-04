@@ -1,0 +1,61 @@
+.backdrop {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.modal {
+    background-color: rgb(0, 0, 0, 0.7);
+    width: 200px;
+    height: 200px;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 16px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.title {
+    padding: 15px;
+    font-weight: 700;
+    font-size: medium;
+    text-align: center;
+}
+
+.btns {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    position: relative;
+    top: 25%;
+}
+
+.yesBtn {
+    text-decoration: none;
+    border: none;
+    background: none repeat scroll 0 0 transparent;
+    background-color: greenyellow;
+    padding: 18px;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.noBtn {
+    text-decoration: none;
+    border: none;
+    background: none repeat scroll 0 0 transparent;
+    background-color: rgb(255, 70, 70);
+    padding: 18px;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.yesBtn:hover,
+.noBtn:hover {
+    transform: scale(1.1);
+}
