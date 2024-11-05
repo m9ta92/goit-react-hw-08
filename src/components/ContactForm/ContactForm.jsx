@@ -14,7 +14,7 @@ const ContactForm = () => {
 	const handleSubmit = (values, actions) => {
 		onAddContact(values);
 		actions.resetForm();
-		toast.success('Added a new contact');
+		toast.success('New contact added !');
 	};
 
 	const onAddContact = formData => {
@@ -28,7 +28,7 @@ const ContactForm = () => {
 	const AddContactSchema = Yup.object({
 		name: Yup.string()
 			.min(3, 'Too short!')
-			.max(50, 'Name must be less than 50 characters')
+			.max(15, 'Name must be less than 15 characters')
 			.required('Required'),
 		number: Yup.string()
 			.required('Required')
@@ -43,12 +43,13 @@ const ContactForm = () => {
 				onSubmit={handleSubmit}
 			>
 				<Form className={css.form}>
+					<h2 className={css.title}>Add new contact</h2>
 					<label>
 						<Field
 							className={css.input}
 							type="text"
 							name="name"
-							placeholder="Enter your name..."
+							placeholder="Enter a name..."
 						/>
 					</label>
 					<ErrorMessage className={css.error} name="name" component="span" />
@@ -57,7 +58,7 @@ const ContactForm = () => {
 							className={css.input}
 							type="text"
 							name="number"
-							placeholder="Enter your number..."
+							placeholder="Enter a number..."
 						/>
 					</label>
 					<ErrorMessage className={css.error} name="number" component="span" />

@@ -7,9 +7,16 @@
     align-items: center;
     border: 1px solid black;
     border-radius: 25px;
-    margin-bottom: 15px;
+    margin-bottom: 40px;
     padding: 15px;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5)
+}
+
+.title {
+    text-shadow: 5px 5px 10px white;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid black;
 }
 
 .input {
@@ -21,6 +28,8 @@
     margin: 5px 0px;
     width: 300px;
     letter-spacing: 2px;
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .input::placeholder {
@@ -28,7 +37,7 @@
 }
 
 .input:hover {
-    border: 1px solid black;
+    transform: scale(1.02);
 }
 
 .input:focus {
@@ -53,6 +62,21 @@
 }
 
 .btn:hover {
-    color: rgb(119, 119, 255);
-    border: 2px solid rgb(119, 119, 255);
+    color: rgb(247, 56, 56);
+    border: 2px solid rgb(247, 56, 56);
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }

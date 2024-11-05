@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
 import { useFormik } from 'formik';
 import { Button, TextField } from '@mui/material';
+import toast, { Toaster } from 'react-hot-toast';
 
 const validationSchema = yup.object({
 	email: yup
@@ -35,6 +36,7 @@ export const LoginForm = () => {
 			})
 			.catch(() => {
 				console.log('login error');
+				toast.error('Invalid email or password !');
 			});
 
 		form.reset();
@@ -52,35 +54,38 @@ export const LoginForm = () => {
 	});
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit} className={css.form} autoComplete="off">
-				<TextField
-					fullWidth
-					id="email"
-					name="email"
-					label="Email"
-					value={formik.values.email}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					error={formik.touched.email && Boolean(formik.errors.email)}
-					helperText={formik.touched.email && formik.errors.email}
-				/>
-				<TextField
-					fullWidth
-					id="password"
-					name="password"
-					label="Password"
-					type="password"
-					value={formik.values.password}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					error={formik.touched.password && Boolean(formik.errors.password)}
-					helperText={formik.touched.password && formik.errors.password}
-				/>
-				<Button color="primary" variant="contained" fullWidth type="submit">
-					Log In
-				</Button>
-			</form>
-		</div>
+		<>
+			<div>
+				<form onSubmit={handleSubmit} className={css.form} autoComplete="off">
+					<TextField
+						fullWidth
+						id="email"
+						name="email"
+						label="Email"
+						value={formik.values.email}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						error={formik.touched.email && Boolean(formik.errors.email)}
+						helperText={formik.touched.email && formik.errors.email}
+					/>
+					<TextField
+						fullWidth
+						id="password"
+						name="password"
+						label="Password"
+						type="password"
+						value={formik.values.password}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						error={formik.touched.password && Boolean(formik.errors.password)}
+						helperText={formik.touched.password && formik.errors.password}
+					/>
+					<Button color="primary" variant="contained" fullWidth type="submit">
+						Log In
+					</Button>
+				</form>
+			</div>
+			<Toaster position="top-center" reverseOrder={false} />
+		</>
 	);
 };

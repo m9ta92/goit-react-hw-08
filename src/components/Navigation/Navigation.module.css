@@ -1,7 +1,7 @@
 .link {
     display: inline-block;
     text-decoration: none;
-    padding: 5px;
+    padding: 15px;
     font-weight: 700;
     font-size: large;
     color: rgb(51, 51, 51);
@@ -12,12 +12,10 @@
 }
 
 .active {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 2px;
-    background-color: rgb(195, 228, 195);
-}
-
-.active:hover {
-    transform: scale(1.03);
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px;
+    font-weight: 700;
+    font-size: large;
+    color: red;
 }

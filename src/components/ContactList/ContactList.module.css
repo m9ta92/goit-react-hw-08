@@ -6,12 +6,20 @@
     padding: 15px;
     min-width: 314px;
     max-width: 314px;
+    min-height: 390px;
+    max-height: 390px;
+    overflow: scroll;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5)
 }
 
 .container::-webkit-scrollbar {
     display: none;
 }
+
+/* .title {
+    text-shadow: 5px 5px 10px white;
+    text-align: center;
+} */
 
 .list {
     display: flex;

@@ -10,7 +10,6 @@ export const UserMenu = () => {
 
 	return (
 		<div className={css.wrapper}>
-			<p className={css.username}>Welcome {user.name}</p>
 			<button
 				className={css.Btn}
 				type="button"
@@ -23,6 +22,7 @@ export const UserMenu = () => {
 				</div>
 				<div className={css.text}>Logout</div>
 			</button>
+			<p className={css.username}>{user.name}</p>
 		</div>
 	);
 };

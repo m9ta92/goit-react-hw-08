@@ -2,12 +2,12 @@ import css from './SearchBox.module.css';
 import { GrClearOption } from 'react-icons/gr';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilteredName } from '../../redux/filters/selectors';
+import { selectFilteredSearchQuery } from '../../redux/filters/selectors';
 import { changeFilter } from '../../redux/filters/slice';
 
 const SearchBox = () => {
 	const dispatch = useDispatch();
-	const filter = useSelector(selectFilteredName);
+	const filter = useSelector(selectFilteredSearchQuery);
 
 	const handleFilterChange = e => {
 		dispatch(changeFilter(e.target.value));
@@ -18,13 +18,13 @@ const SearchBox = () => {
 	};
 
 	return (
-		<div className={css.search}>
-			<h4>Find contact by name:</h4>
+		<div className={css.container}>
+			<h2 className={css.title}>Find contacts</h2>
 			<label className={css.form}>
 				<input
 					className={css.input}
 					type="text"
-					placeholder="Search contact..."
+					placeholder="Search by name or number"
 					value={filter}
 					onChange={handleFilterChange}
 				/>

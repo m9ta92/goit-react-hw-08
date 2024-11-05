@@ -27,16 +27,19 @@ function ContactsPage() {
 
 	return (
 		<>
-			<div className={css.app}>
-				<h1 className={css.title}>My phonebook</h1>
-				<ContactForm />
-				<SearchBox />
+			<div className={css.container}>
+				<div>
+					<ContactForm />
+					<SearchBox />
+				</div>
 				{isLoading && !error && <Loader />}
-				{contacts ? (
-					<ContactList contacts={contacts} />
-				) : (
-					<b>Request in progress...</b>
-				)}
+				<div>
+					{contacts ? (
+						<ContactList contacts={contacts} />
+					) : (
+						<b>Request in progress...</b>
+					)}
+				</div>
 			</div>
 		</>
 	);
