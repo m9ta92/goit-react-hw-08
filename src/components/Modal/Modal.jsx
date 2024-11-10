@@ -8,7 +8,7 @@ const Modal = ({ id, name, onClose, isOpen }) => {
 
 	const omg = () => {
 		dispatch(deleteContact(id));
-		toast.success('Contact deleted successfully !');
+		toast.success(`${name} deleted successfully`);
 	};
 
 	if (!isOpen) return null;

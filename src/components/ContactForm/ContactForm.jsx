@@ -14,7 +14,7 @@ const ContactForm = () => {
 	const handleSubmit = (values, actions) => {
 		onAddContact(values);
 		actions.resetForm();
-		toast.success('New contact added !');
+		toast.success(`${values.name} has been successfully added`);
 	};
 
 	const onAddContact = formData => {

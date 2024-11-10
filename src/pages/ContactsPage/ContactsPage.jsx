@@ -27,19 +27,13 @@ function ContactsPage() {
 
 	return (
 		<>
+			{isLoading && !error && <Loader />}
 			<div className={css.container}>
 				<div>
 					<ContactForm />
 					<SearchBox />
 				</div>
-				{isLoading && !error && <Loader />}
-				<div>
-					{contacts ? (
-						<ContactList contacts={contacts} />
-					) : (
-						<b>Request in progress...</b>
-					)}
-				</div>
+				<div>{contacts ? <ContactList /> : <Loader />}</div>
 			</div>
 		</>
 	);

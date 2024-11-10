@@ -56,7 +56,7 @@ export const LoginForm = () => {
 	return (
 		<>
 			<div>
-				<form onSubmit={handleSubmit} className={css.form} autoComplete="off">
+				<form onSubmit={handleSubmit} className={css.form} autoComplete="on">
 					<TextField
 						fullWidth
 						id="email"
