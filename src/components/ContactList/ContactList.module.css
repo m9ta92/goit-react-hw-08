@@ -1,8 +1,8 @@
 .container {
     display: flex;
+    flex-direction: column;
     border: 1px solid black;
     border-radius: 25px;
-    justify-content: center;
     padding: 15px;
     min-width: 314px;
     max-width: 314px;
@@ -16,14 +16,17 @@
     display: none;
 }
 
-/* .title {
+.title {
     text-shadow: 5px 5px 10px white;
+    margin-bottom: 10px;
     text-align: center;
-} */
+    border-bottom: 1px solid black;
+}
 
 .list {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+
 }

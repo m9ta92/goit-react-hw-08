@@ -12,7 +12,7 @@ const ContactList = () => {
 		return (
 			<>
 				<div className={css.container}>
-					{/* <h2 className={css.title}>Contacts list</h2> */}
+					<h2 className={css.title}>Contacts:</h2>
 					<ul className={css.list}>
 						{contacts &&
 							contacts.map(contact => (
