@@ -3,14 +3,11 @@ import css from './RegistrationForm.module.css';
 import * as yup from 'yup';
 import { register } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
-import { Button, TextField } from '@mui/material';
-import { useFormik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import toast, { Toaster } from 'react-hot-toast';
 
 const validationSchema = yup.object({
-	name: yup
-		.string('Enter your name')
-		.min(6, 'Name should be of minimum 6 characters length')
-		.required('Name is required'),
+	name: yup.string('Enter your name').required('Name is required'),
 	email: yup
 		.string('Enter your email')
 		.email('Enter a valid email')
@@ -21,78 +18,84 @@ const validationSchema = yup.object({
 		.required('Password is required'),
 });
 
+const INITIAL_VALUES = {
+	name: '',
+	email: '',
+	password: '',
+};
+
 export const RegistrationForm = () => {
 	const dispatch = useDispatch();
 
-	const handleSubmit = e => {
-		e.preventDefault();
-		const form = e.target;
-
-		dispatch(
-			register({
-				name: form.elements.name.value,
-				email: form.elements.email.value,
-				password: form.elements.password.value,
+	const handleSubmit = (values, actions) => {
+		dispatch(register(values))
+			.unwrap()
+			.then(() => {
+				console.log('register success');
+				toast.success('Register success !');
 			})
-		);
-
-		form.reset();
+			.catch(() => {
+				console.log('register error');
+				toast.error('User with this name or email address already exists !');
+			});
+		actions.resetForm();
 	};
-
-	const formik = useFormik({
-		initialValues: {
-			name: '',
-			email: '',
-			password: '',
-		},
-		validationSchema: validationSchema,
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-		},
-	});
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit} autoComplete="off" className={css.form}>
-				<TextField
-					fullWidth
-					id="name"
-					name="name"
-					label="Username"
-					type="text"
-					value={formik.values.name}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					error={formik.touched.name && Boolean(formik.errors.name)}
-					helperText={formik.touched.name && formik.errors.name}
-				/>
-				<TextField
-					fullWidth
-					id="email"
-					name="email"
-					label="Email"
-					value={formik.values.email}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					error={formik.touched.email && Boolean(formik.errors.email)}
-					helperText={formik.touched.email && formik.errors.email}
-				/>
-				<TextField
-					fullWidth
-					id="password"
-					name="password"
-					label="Password"
-					type="password"
-					value={formik.values.password}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					error={formik.touched.password && Boolean(formik.errors.password)}
-					helperText={formik.touched.password && formik.errors.password}
-				/>
-				<Button color="primary" variant="contained" fullWidth type="submit">
-					Register
-				</Button>
-			</form>
+			<Formik
+				initialValues={INITIAL_VALUES}
+				validationSchema={validationSchema}
+				onSubmit={handleSubmit}
+			>
+				<Form className={css.form}>
+					<label>
+						<Field
+							type="text"
+							name="name"
+							className={css.input}
+							placeholder="Enter your name"
+						/>
+						<ErrorMessage
+							className={css.errorMessage}
+							name="name"
+							component="span"
+						/>
+					</label>
+					<label>
+						<Field
+							type="text"
+							name="email"
+							className={css.input}
+							placeholder="Enter your email"
+						/>
+						<ErrorMessage
+							className={css.errorMessage}
+							name="email"
+							component="span"
+						/>
+					</label>
+					<label>
+						<Field
+							type="password"
+							name="password"
+							className={css.input}
+							placeholder="Enter your password"
+						/>
+						<ErrorMessage
+							className={css.errorMessage}
+							name="password"
+							component="span"
+						/>
+					</label>
+					<button className={css.btn} type="submit">
+						Register
+					</button>
+				</Form>
+			</Formik>
+			<Toaster position="top-center" reverseOrder={false} />
 		</div>
 	);
 };
+
+export default RegistrationForm;

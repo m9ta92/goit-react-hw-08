@@ -9,8 +9,7 @@ const HomePage = () => {
 					<span style={{ color: 'green' }}>to </span>
 					<span style={{ color: 'white' }}>your </span>
 					<span style={{ color: 'grey' }}>private </span>
-					<span style={{ color: 'purple' }}>phonebook </span>
-					<span>🙋‍♂️</span>
+					<span style={{ color: 'purple' }}>phonebook !</span>
 				</h1>
 			</div>
 		</>

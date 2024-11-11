@@ -1,6 +1,6 @@
 import css from './SearchBox.module.css';
-import { GrClearOption } from 'react-icons/gr';
 
+import { GrClearOption } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredSearchQuery } from '../../redux/filters/selectors';
 import { changeFilter } from '../../redux/filters/slice';
