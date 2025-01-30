@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://phonebook-we2j.onrender.com";
+// axios.defaults.baseURL = "https://phonebook-we2j.onrender.com";
+axios.defaults.baseURL = "http://localhost:3000";
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -29,8 +30,8 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post("/auth/login", credentials);
+      console.log(res);
       setAuthHeader(res.data.data.accessToken);
-      console.log(res.data.data.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -40,19 +41,18 @@ export const logIn = createAsyncThunk(
 
 export const refreshUser = createAsyncThunk(
   "auth/refreshUser",
-  async (_, thunkApi) => {
+  async (data, thunkApi) => {
     const state = thunkApi.getState();
-    const token = state.auth?.token;
+    const accessToken = state.auth.token;
 
-    if (!token) {
+    if (!accessToken) {
       return thunkApi.rejectWithValue("No token provided to refresh user data");
     }
 
     try {
-      setAuthHeader(token);
-      const res = await axios.get("/auth/current");
-      console.log(res);
-      return res.data.accessToken;
+      setAuthHeader(`'${accessToken}'`);
+      const res = await axios.get("/current", `'${accessToken}'`);
+      return res.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
