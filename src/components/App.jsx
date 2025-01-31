@@ -1,64 +1,20 @@
-import { Route, Routes } from 'react-router-dom';
-import { lazy, Suspense, useEffect } from 'react';
-import { Layout } from './Layout';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsRefreshing } from '../redux/auth/selectors';
-// import { refreshUser } from '../redux/auth/operations';
-import { RestrictedRoute } from './RestrictedRoute';
-import { PrivateRoute } from './PrivateRoute';
-import Loader from './Loader/Loader';
-import { refreshUser } from '../redux/auth/operations';
-
-const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
-const RegistrationPage = lazy(
-	() => import('../pages/RegistrationPage/RegistrationPage')
-);
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
+import { useState } from 'react';
+import SettingModal from './Modals/SettingModal/SettingModal';
 
 const App = () => {
-	const dispatch = useDispatch();
-	const isRefreshing = useSelector(selectIsRefreshing);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const openModal = () => setIsModalOpen(true);
+	const closeModal = () => setIsModalOpen(false);
 
-	useEffect(() => {
-		dispatch(refreshUser());
-	}, [dispatch]);
-
-	return isRefreshing ? (
-		<Loader />
-	) : (
-		<Layout>
-			<Suspense fallback={null}>
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-					<Route
-						path="/register"
-						element={
-							<RestrictedRoute
-								redirectTo="/login"
-								component={<RegistrationPage />}
-							/>
-						}
-					/>
-					<Route
-						path="/login"
-						element={
-							<RestrictedRoute
-								redirectTo="/contacts"
-								component={<LoginPage />}
-							/>
-						}
-					/>
-					<Route
-						path="/contacts"
-						element={
-							<PrivateRoute redirectTo="/login" component={<ContactsPage />} />
-						}
-					/>
-					<Route path="*" element={<HomePage />} />
-				</Routes>
-			</Suspense>
-		</Layout>
+	return (
+		<>
+			<div>
+				<button onClick={openModal} type="button">
+					Setting
+				</button>
+			</div>
+			<SettingModal isOpen={isModalOpen} onClose={closeModal} />
+		</>
 	);
 };
 
